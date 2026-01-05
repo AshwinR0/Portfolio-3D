@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ashwin R - Developer Universe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SEO: meta description, social previews, and JSON-LD -->
+    <meta
+      name="description"
+      content="Ashwin R — Full Stack Developer & AI Engineer. Building scalable web apps and AI solutions. View projects and experience."
+    />
+    <link rel="canonical" href="https://yourdomain.com/" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Ashwin R — Full Stack Developer & AI Engineer"
+    />
+    <meta
+      property="og:description"
+      content="Full Stack Developer & AI Engineer building scalable web apps and AI solutions."
+    />
+    <meta
+      property="og:image"
+      content="https://yourdomain.com/assets/images/og/portfolio-og.png"
+    />
+    <meta property="og:url" content="https://yourdomain.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ashwin R — Full Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Full Stack Developer & AI Engineer. See projects and experience."
+    />
+    <meta
+      name="twitter:image"
+      content="https://yourdomain.com/assets/images/og/portfolio-og.png"
+    />
+
+    <!-- JSON-LD: Person -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ashwin R",
+        "url": "https://yourdomain.com",
+        "jobTitle": "Full Stack Developer",
+        "sameAs": [
+          "https://github.com/AshwinR0",
+          "https://linkedin.com/in/ashwinrevi"
+        ]
+      }
+    </script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        color: white;
+        font-family: sans-serif;
+        touch-action: manipulation;
+      }
+      * {
+        cursor: none !important;
+      }
+      #canvas-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+      .ui-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        pointer-events: none;
+      }
+      .pointer-events-auto {
+        pointer-events: auto;
+      }
+      /* Mobile UI improvements */
+      @media (max-width: 767px) {
+        .max-w-4xl {
+          max-width: 100vw;
+        }
+        .p-6 {
+          padding: 1rem !important;
+        }
+        .mb-6 {
+          margin-bottom: 1rem !important;
+        }
+        .mb-8 {
+          margin-bottom: 1.25rem !important;
+        }
+        h1 {
+          font-size: 2rem !important;
+        }
+        h2 {
+          font-size: 1rem !important;
+        }
+        .text-2xl,
+        .md\:text-2xl {
+          font-size: 1.125rem !important;
+        }
+        .text-5xl,
+        .md\:text-7xl {
+          font-size: 2rem !important;
+        }
+        .text-xl {
+          font-size: 1rem !important;
+        }
+        .text-lg {
+          font-size: 1rem !important;
+        }
+        .text-sm {
+          font-size: 0.875rem !important;
+        }
+        .text-gray-400,
+        .text-gray-300 {
+          font-size: 0.875rem !important;
+        }
+        .rounded-full {
+          border-radius: 1.5rem !important;
+        }
+        .gap-6 {
+          gap: 0.75rem !important;
+        }
+        .gap-4 {
+          gap: 0.5rem !important;
+        }
+        .px-6 {
+          padding-left: 1rem !important;
+          padding-right: 1rem !important;
+        }
+        .py-2 {
+          padding-top: 0.5rem !important;
+          padding-bottom: 0.5rem !important;
+        }
+        .side-panel {
+          height: 65vh !important;
+          min-height: 320px;
+        }
+        #side-panel {
+          padding: 1rem !important;
+          height: max-content;
+        }
+        #panel-content {
+          padding-right: 0.25rem !important;
+        }
+        .overflow-y-auto {
+          max-height: 50vh !important;
+        }
+        .flex.items-center.gap-4.mt-auto.pt-4.md\:pt-0 button {
+          min-width: 44px;
+          min-height: 44px;
+        }
+      }
+
+      /* Transitions */
+      .fade-enter {
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .fade-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .fade-exit {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .fade-exit-active {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      /* Panel Animations: Slide Right on Desktop, Slide Up on Mobile */
+      .slide-panel {
+        transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* Desktop Default */
+      @media (min-width: 768px) {
+        .slide-panel {
+          transform: translateX(100%);
+        }
+        .slide-panel.active {
+          transform: translateX(0);
+        }
+      }
+
+      /* Mobile Override */
+      @media (max-width: 767px) {
+        .slide-panel {
+          transform: translateY(100%);
+        }
+        .slide-panel.active {
+          transform: translateY(0);
+        }
+      }
+
+      /* Aurora Text Effect */
+      @keyframes auroraMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes auraPulse {
+        0% {
+          opacity: 0.7;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.03);
+        }
+        100% {
+          opacity: 0.7;
+          transform: scale(1);
+        }
+      }
+
+      .aurora {
+        position: relative;
+        display: inline-block;
+        background: linear-gradient(
+          90deg,
+          #7df9ff 0%,
+          #4cc9f0 20%,
+          #00ff9d 40%,
+          #ffd166 60%,
+          #ff7aa2 80%
+        );
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: auroraMove 6s linear infinite;
+        will-change: background-position, transform, opacity;
+        mix-blend-mode: screen;
+      }
+
+      .aurora::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 140%;
+        height: 140%;
+        background: radial-gradient(
+            circle at 30% 30%,
+            rgba(124, 255, 255, 0.12),
+            rgba(0, 0, 0, 0) 30%
+          ),
+          radial-gradient(
+            circle at 70% 70%,
+            rgba(255, 170, 100, 0.08),
+            rgba(0, 0, 0, 0) 40%
+          );
+        filter: blur(18px) saturate(120%);
+        opacity: 0.75;
+        pointer-events: none;
+        animation: auraPulse 3.5s ease-in-out infinite;
+      }
+
+      /* Slightly different timing for subtitle */
+      .aurora-sub {
+        position: relative;
+        display: inline-block;
+        background: linear-gradient(
+          90deg,
+          #a8fff0 0%,
+          #7df9ff 30%,
+          #4cc9f0 60%
+        );
+        background-size: 180% 180%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: auroraMove 8s linear infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 3D Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Loading Screen -->
+    <div
+      id="loading-screen"
+      class="absolute inset-0 flex items-center justify-center bg-black z-50 transition-opacity duration-500"
+    >
+      <div class="text-cyan-400 text-2xl font-bold animate-pulse">
+        Initializing Universe...
+      </div>
+    </div>
+
+    <!-- Comet Cursor Canvas -->
+    <canvas
+      id="comet-canvas"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        pointer-events: none;
+      "
+    ></canvas>
+
+    <!-- UI Overlay -->
+    <div class="ui-layer">
+      <!-- Main Profile (Visible when no project selected) -->
+      <div
+        id="profile-section"
+        class="absolute top-0 left-0 w-full p-6 transition-all duration-500 fade-enter-active"
+      >
+        <div class="max-w-4xl mx-auto text-center pointer-events-auto">
+          <h1 class="text-5xl md:text-7xl font-bold mb-2 drop-shadow-lg aurora">
+            Ashwin R
+          </h1>
+          <h2 class="text-xl md:text-2xl tracking-widest mb-4 aurora-sub block">
+            Full Stack Developer
+          </h2>
+          <p class="text-gray-400 max-w-xl mx-auto leading-relaxed">
+            Full Stack Developer & AI Engineer with 4+ years of experience
+            building scalable web apps and AI solutions.
+          </p>
+
+          <!-- Contact Links -->
+          <div class="mt-6 flex justify-center gap-6 mb-6 flex-wrap">
+            <a
+              href="mailto:ashwinrevil0@gmail.com"
+              class="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors text-sm md:text-base"
+              title="Email"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              <span>Email</span>
+            </a>
+            <a
+              href="https://github.com/AshwinR0"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors text-sm md:text-base"
+              title="GitHub"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                ></path>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/ashwinrevi"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors text-sm md:text-base"
+              title="LinkedIn"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                ></path>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+
+          <div class="mt-6 flex justify-center gap-4 flex-wrap">
+            <button
+              id="btn-explore"
+              class="px-6 py-2 border border-cyan-500 text-cyan-500 rounded-full hover:bg-cyan-500 hover:text-black transition-all uppercase tracking-wider text-sm"
+            >
+              Explore Projects
+            </button>
+            <button
+              id="btn-experience"
+              class="px-6 py-2 border border-yellow-500 text-yellow-500 rounded-full hover:bg-yellow-500 hover:text-black transition-all uppercase tracking-wider text-sm"
+            >
+              Experience
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Navigation Hint -->
+      <div
+        id="nav-hint"
+        class="absolute bottom-8 w-full text-center transition-opacity duration-500"
+      >
+        <p class="text-sm text-gray-500 animate-bounce">
+          Scroll or Drag to Explore • Click "Explore" to Tour
+        </p>
+      </div>
+
+      <!-- Side Panel (Visible when project selected) -->
+      <!-- Mobile: Bottom Sheet (h-60%, bottom-0) | Desktop: Right Panel (h-full, top-0, w-1/3) -->
+      <div
+        id="side-panel"
+        class="absolute bottom-0 md:top-0 right-0 w-full md:w-1/3 h-[60%] md:h-full bg-black/90 md:bg-black/80 backdrop-blur-md border-t md:border-t-0 md:border-l border-white/10 p-6 md:p-8 flex flex-col justify-center slide-panel pointer-events-auto overflow-y-auto md:overflow-hidden"
+      >
+        <div id="panel-content">
+          <!-- Content injected via JS -->
+        </div>
+
+        <div class="flex items-center gap-4 mt-auto pt-4 md:pt-0">
+          <button
+            id="btn-prev"
+            class="p-3 rounded-full bg-white/5 hover:bg-white/20 border border-white/10 transition-all"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <button
+            id="btn-reset"
+            class="flex-1 py-3 rounded-full bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 border border-cyan-500/50 transition-all flex items-center justify-center gap-2"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M21.5315 11.5857L20.75 10.9605V21.25H22C22.4142 21.25 22.75 21.5858 22.75 22C22.75 22.4143 22.4142 22.75 22 22.75H2.00003C1.58581 22.75 1.25003 22.4143 1.25003 22C1.25003 21.5858 1.58581 21.25 2.00003 21.25H3.25003V10.9605L2.46855 11.5857C2.1451 11.8445 1.67313 11.792 1.41438 11.4686C1.15562 11.1451 1.20806 10.6731 1.53151 10.4144L9.65742 3.91366C11.027 2.818 12.9731 2.818 14.3426 3.91366L22.4685 10.4144C22.792 10.6731 22.8444 11.1451 22.5857 11.4686C22.3269 11.792 21.855 11.8445 21.5315 11.5857ZM12 6.75004C10.4812 6.75004 9.25003 7.98126 9.25003 9.50004C9.25003 11.0188 10.4812 12.25 12 12.25C13.5188 12.25 14.75 11.0188 14.75 9.50004C14.75 7.98126 13.5188 6.75004 12 6.75004ZM13.7459 13.3116C13.2871 13.25 12.7143 13.25 12.0494 13.25H11.9507C11.2858 13.25 10.7129 13.25 10.2542 13.3116C9.76255 13.3777 9.29128 13.5268 8.90904 13.9091C8.52679 14.2913 8.37773 14.7626 8.31163 15.2542C8.24996 15.7129 8.24999 16.2858 8.25003 16.9507L8.25003 21.25H9.75003H14.25H15.75L15.75 16.9507L15.75 16.8271C15.7498 16.2146 15.7462 15.6843 15.6884 15.2542C15.6223 14.7626 15.4733 14.2913 15.091 13.9091C14.7088 13.5268 14.2375 13.3777 13.7459 13.3116Z"
+                fill="#1C274C"
+              />
+              <g opacity="0.5">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10.75 9.5C10.75 8.80964 11.3096 8.25 12 8.25C12.6904 8.25 13.25 8.80964 13.25 9.5C13.25 10.1904 12.6904 10.75 12 10.75C11.3096 10.75 10.75 10.1904 10.75 9.5Z"
+                  fill="#1C274C"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10.75 9.5C10.75 8.80964 11.3096 8.25 12 8.25C12.6904 8.25 13.25 8.80964 13.25 9.5C13.25 10.1904 12.6904 10.75 12 10.75C11.3096 10.75 10.75 10.1904 10.75 9.5Z"
+                  fill="#1C274C"
+                />
+              </g>
+              <path
+                opacity="0.5"
+                d="M12.0494 13.25C12.7142 13.25 13.2871 13.2499 13.7458 13.3116C14.2375 13.3777 14.7087 13.5268 15.091 13.909C15.4732 14.2913 15.6223 14.7625 15.6884 15.2542C15.7462 15.6842 15.7498 16.2146 15.75 16.827L15.75 21.25H8.25L8.25 16.9506C8.24997 16.2858 8.24993 15.7129 8.31161 15.2542C8.37771 14.7625 8.52677 14.2913 8.90901 13.909C9.29126 13.5268 9.76252 13.3777 10.2542 13.3116C10.7129 13.2499 11.2858 13.25 11.9506 13.25H12.0494Z"
+                fill="#1C274C"
+              />
+              <path
+                opacity="0.5"
+                d="M16 3H18.5C18.7761 3 19 3.22386 19 3.5L19 7.63955L15.5 4.83955V3.5C15.5 3.22386 15.7239 3 16 3Z"
+                fill="#1C274C"
+              />
+            </svg>
+            <span>Home</span>
+          </button>
+
+          <button
+            id="btn-next"
+            class="p-3 rounded-full bg-white/5 hover:bg-white/20 border border-white/10 transition-all"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Import Maps for Three.js -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <!-- Main Logic -->
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+      import gsap from "https://unpkg.com/gsap@3.12.5/index.js";
+
+      // --- DATA ---
+      const RESUME_DATA = {
+        experience: [
+          {
+            company: "QBurst Technologies",
+            position: "Software Developer",
+            period: "2022 - Present",
+            description: "Building scalable web applications and AI solutions",
+          },
+          {
+            company: "Cognizant Technologies",
+            position: "Programmer Analyst",
+            period: "2020 - 2022",
+            description: "Developed enterprise-level solutions",
+          },
+        ],
+        projects: [
+          {
+            id: 0,
+            title: "AI-Powered Recruitment",
+            desc: "Integrated new UI/UX designs, built RESTful APIs for AI matching, and boosted frontend performance by 30%.",
+            color: 0x4cc9f0, // Cyan
+            tech: ["React", "Python", "FastAPI", "PostgreSQL"],
+            size: 1.2,
+            distance: 15,
+            speed: 0.002,
+          },
+          {
+            id: 1,
+            title: "Timesheet Data Importer",
+            desc: "Automated data pipeline using Golang to process client timesheets into unified formats using AWS S3 & SQS.",
+            color: 0xf72585, // Pink
+            tech: ["Golang", "AWS S3", "AWS SQS", "Docker"],
+            size: 1.0,
+            distance: 22,
+            speed: 0.0015,
+          },
+          {
+            id: 2,
+            title: "Chatbot Plugin",
+            desc: "Engineered a versatile chatbot plugin reducing support inquiries by 25%. Modular design for easy adoption.",
+            color: 0x7209b7, // Purple
+            tech: ["React", "Python", "OpenAI", "PostgreSQL"],
+            size: 0.9,
+            distance: 28,
+            speed: 0.001,
+          },
+          {
+            id: 3,
+            title: "Warehouse Order Prediction",
+            desc: "Analyzed 4 years of data with Prophet model to predict order volumes, reducing stock-outs by 20%.",
+            color: 0xffaa00, // Orange
+            tech: ["Python", "Pandas", "NumPy", "Matplotlib"],
+            size: 1.1,
+            distance: 35,
+            speed: 0.0008,
+          },
+          {
+            id: 4,
+            title: "SoccerQ",
+            desc: "A comprehensive football tournament management platform that tracks players, teams, and seasons with real-time statistics, leaderboards, points tables, and cumulative performance analytics.",
+            url: "https://soccer-q.vercel.app/",
+            color: 0x00ff9d, // Green
+            tech: ["ReactJS", "Supabase", "Tailwind", "React-Query"],
+            size: 0.8,
+            distance: 42,
+            speed: 0.0005,
+          } ,
+          {
+            id: 5,
+            title: "React Tutor",
+            desc: "An interactive React education platform that visualizes core concepts like state, props, hooks, rendering behavior, and performance patterns—helping learners build correct mental models through hands-on experimentation and real-time feedback.",
+            url: "https://react.ashwin-dev.site/",
+            color: 0x4cc9f0, // Cyan
+            tech: ["React", "TypeScript", "Vite", "TailwindCSS"],
+            size: 1.2,
+            distance: 50,
+            speed: 0.002,
+          },
+          {
+            id: 6,
+            title: "Github Bookmark Manager",
+            desc: "A modern web application that lets developers search, bookmark, and organize GitHub repositories in one centralized workspace. It features interactive stats visualizations to quickly assess repository popularity and activity. Supports CSV import for bulk repository management, enabling real-world, scalable workflows.",
+            color: 0xf72585, // Pink
+            tech: ["React", "FastAPI", "Docker", "PostgreSQL", "TailwindCSS", "Typescript", "Tanstack"],
+            size: 1.0,
+            distance: 60,
+            speed: 0.0015,
+          },
+          {
+            id: 7,
+            title: "Chess Grandmaster AI",
+            desc: "An interactive chess mentorship platform using React.js and Google AI Studio that converts raw game PGNs into actionable strategic insights. Leveraging the Gemini 2.5 model, the application provides detailed, human-like coaching on tactics and move logic, offering a sophisticated, accessible alternative to premium analysis engines.",
+            url: "https://aistudio.google.com/apps/drive/1JVI5eUDGiy4DQVxeiG0O9_R0AwONgLCW",
+            color: 0x7209b7, // Purple
+            tech: ["React", "TailwindCSS", "Typescript", "Vite"],
+            size: 1.3,
+            distance: 72,
+            speed: 0.001,
+          }
+        ],
+      };
+
+      // --- ASSETS HELPERS ---
+      const getTechLogo = (techName) => {
+        const n = techName.toLowerCase().replace(".", "").replace("js", "");
+        const tanstackSVG = `<svg height="660" viewBox="0 0 663 660" width="663" xmlns="http://www.w3.org/2000/svg"><path d="m305.114318.62443771c8.717817-1.14462121 17.926803-.36545135 26.712694-.36545135 32.548987 0 64.505987 5.05339923 95.64868 14.63098274 39.74418 12.2236582 76.762804 31.7666864 109.435876 57.477568 40.046637 31.5132839 73.228974 72.8472109 94.520714 119.2362609 39.836383 86.790386 39.544267 191.973146-1.268422 278.398081-26.388695 55.880442-68.724007 102.650458-119.964986 136.75724-41.808813 27.828603-90.706831 44.862601-140.45707 50.89341-63.325458 7.677926-131.784923-3.541603-188.712259-32.729444-106.868873-54.795293-179.52309291-165.076271-180.9604082-285.932068-.27660564-23.300971.08616998-46.74071 4.69884909-69.814998 7.51316071-37.57857 20.61272131-73.903917 40.28618971-106.877282 21.2814003-35.670293 48.7704861-67.1473767 81.6882804-92.5255597 38.602429-29.7610135 83.467691-51.1674988 130.978372-62.05777669 11.473831-2.62966514 22.9946-4.0869914 34.57273-5.4964306l3.658171-.44480576c3.050084-.37153079 6.104217-.74794222 9.162589-1.14972654zm-110.555861 549.44131429c-14.716752 1.577863-30.238964 4.25635-42.869928 12.522173 2.84343.683658 6.102369.004954 9.068638 0 7.124652-.011559 14.317732-.279903 21.434964.032202 17.817402.781913 36.381729 3.63214 53.58741 8.350042 22.029372 6.040631 41.432961 17.928687 62.656049 25.945156 22.389644 8.456554 44.67706 11.084675 68.427 11.084675 11.96813 0 23.845573-.035504 35.450133-3.302696-6.056202-3.225083-14.72582-2.619864-21.434964-3.963236-14.556814-2.915455-28.868774-6.474936-42.869928-11.470264-10.304996-3.676672-20.230803-8.214291-30.11097-12.848661l-6.348531-2.985046c-9.1705-4.309263-18.363277-8.560752-27.845391-12.142608-24.932161-9.418465-52.560181-14.071964-79.144482-11.221737zm22.259385-62.614168c-29.163917 0-58.660076 5.137344-84.915434 18.369597-6.361238 3.206092-12.407546 7.02566-18.137277 11.258891-1.746125 1.290529-4.841829 2.948483-5.487351 5.191839-.654591 2.275558 1.685942 4.182039 3.014086 5.637703 6.562396-3.497556 12.797498-7.199878 19.78612-9.855246 45.19892-17.169893 99.992458-13.570779 145.098218 2.172348 22.494346 7.851335 43.219483 19.592421 65.129314 28.800338 24.503461 10.297807 49.53043 16.975034 75.846795 20.399104 31.04195 4.037546 66.433549.7654 94.808495-13.242161 9.970556-4.921843 23.814245-12.422267 28.030337-23.320339-5.207047.454947-9.892236 2.685918-14.83959 4.224149-7.866632 2.445646-15.827248 4.51974-23.908229 6.138887-27.388113 5.486604-56.512458 6.619429-84.091013 1.639788-25.991939-4.693152-50.142596-14.119246-74.179513-24.03502l-3.068058-1.268177c-2.045137-.846788-4.089983-1.695816-6.135603-2.544467l-3.069142-1.272366c-12.279956-5.085721-24.606928-10.110797-37.210937-14.51024-24.485325-8.546552-50.726667-13.784628-76.671218-13.784628zm51.114145-447.9909432c-34.959602 7.7225298-66.276908 22.7605319-96.457338 41.7180089-17.521434 11.0054099-34.281927 22.2799893-49.465301 36.4444283-22.5792616 21.065423-39.8360564 46.668751-54.8866988 73.411509-15.507372 27.55357-25.4498976 59.665686-30.2554517 90.824149-4.7140432 30.568106-5.4906485 62.70747-.0906864 93.301172 6.7503648 38.248526 19.5989769 74.140579 39.8896436 107.337631 6.8187918-3.184625 11.659796-10.445603 17.3128555-15.336896 11.4149428-9.875888 23.3995608-19.029311 36.2745548-26.928535 4.765981-2.923712 9.662222-5.194315 14.83959-7.275014 1.953055-.785216 5.14604-1.502727 6.06527-3.647828 1.460876-3.406732-1.240754-9.335897-1.704904-12.865654-1.324845-10.095517-2.124534-20.362774-1.874735-30.549941.725492-29.668947 6.269727-59.751557 16.825623-87.521453 7.954845-20.924233 20.10682-39.922168 34.502872-56.971512 4.884699-5.785498 10.077731-11.170545 15.437296-16.512656 3.167428-3.157378 7.098271-5.858983 9.068639-9.908915-10.336599.006606-20.674847 2.987289-30.503603 6.013385-21.174447 6.519522-41.801477 16.19312-59.358362 29.841512-8.008432 6.226409-13.873368 14.387371-21.44733 20.939921-2.32322 2.010516-6.484901 4.704691-9.695199 3.187928-4.8500728-2.29042-4.1014979-11.835213-4.6571581-16.222019-2.1369011-16.873476 4.2548401-38.216325 12.3778671-52.843142 13.039878-23.479694 37.150915-43.528712 65.467327-42.82854 12.228647.302197 22.934587 4.551115 34.625711 7.324555-2.964621-4.211764-6.939158-7.28162-10.717482-10.733763-9.257431-8.459031-19.382979-16.184864-30.503603-22.028985-4.474136-2.350694-9.291232-3.77911-14.015169-5.506421-2.375159-.867783-5.36616-2.062533-6.259834-4.702213-1.654614-4.888817 7.148561-9.416813 10.381943-11.478522 12.499882-7.969406 27.826705-14.525258 42.869928-14.894334 23.509209-.577147 46.479246 12.467678 56.162903 34.665926 3.404469 7.803171 4.411273 16.054969 5.079109 24.382907l.121749 1.56229.174325 2.345587c.01913.260708.038244.521433.057403.782164l.11601 1.56437.120128 1.563971c7.38352-6.019164 12.576553-14.876995 19.78612-21.323859 16.861073-15.07846 39.936636-21.7722 61.831627-14.984333 19.786945 6.133107 36.984382 19.788105 47.105807 37.959541 2.648042 4.754231 10.035685 16.373942 4.698379 21.109183-4.177345 3.707277-9.475079.818243-13.880788-.719162-3.33605-1.16376-6.782939-1.90214-10.241828-2.585698l-1.887262-.369639c-.629089-.122886-1.257979-.246187-1.886079-.372129-11.980496-2.401886-25.91652-2.152533-37.923398-.041284-7.762754 1.364839-15.349083 4.127545-23.083807 5.271929v1.651348c21.149714.175043 41.608563 12.240618 52.043268 30.549941 4.323267 7.585468 6.482428 16.267431 8.138691 24.770223 2.047864 10.50918.608423 21.958802-2.263037 32.201289-.962925 3.433979-2.710699 9.255807-6.817143 10.046802-2.902789.558982-5.36781-2.330878-7.024898-4.279468-4.343878-5.10762-8.475879-9.96341-13.573278-14.374161-12.895604-11.157333-26.530715-21.449361-40.396663-31.373138-7.362086-5.269452-15.425755-12.12007-23.908229-15.340199 2.385052 5.745041 4.721463 11.086326 5.532694 17.339156 2.385876 18.392716-5.314223 35.704625-16.87179 49.540445-3.526876 4.222498-7.29943 8.475545-11.744712 11.755948-1.843407 1.360711-4.156734 3.137561-6.595373 2.752797-7.645687-1.207961-8.555849-12.73272-9.728176-18.637115-3.970415-19.998652-2.375984-39.861068 3.132802-59.448534-4.901187 2.485279-8.443727 7.923994-11.521293 12.385111-6.770975 9.816439-12.645804 20.199291-16.858599 31.375615-16.777806 44.519521-16.616219 96.664142 5.118834 139.523233 2.427098 4.786433 6.110614 4.144058 10.894733 4.144058.720854 0 1.44257-.004515 2.164851-.010924l2.168232-.022283c4.338648-.045438 8.686803-.064635 12.979772.508795 2.227588.297243 5.320818.032202 7.084256 1.673642 2.111344 1.966755.986008 5.338808.4996 7.758859-1.358647 6.765574-1.812904 12.914369-1.812904 19.816178 9.02412-1.398692 11.525415-15.866153 14.724172-23.118874 3.624982-8.216283 7.313444-16.440823 10.667192-24.770223 1.648843-4.093692 3.854171-8.671229 3.275427-13.210785-.649644-5.10184-4.335633-10.510831-6.904531-14.862134-4.86244-8.234447-10.389363-16.70834-13.969002-25.595896-2.861567-7.104926-.197036-15.983399 7.871579-18.521521 4.450228-1.400344 9.198073 1.345848 12.094266 4.562675 6.07269 6.74328 9.992815 16.777697 14.401823 24.692609l34.394873 61.925556c2.920926 5.243856 5.848447 10.481933 8.836976 15.687808 1.165732 2.031158 2.352075 5.167068 4.740424 6.0332 2.127008.77118 5.033095-.325315 7.148561-.748886 5.492297-1.099798 10.97635-2.287117 16.488434-3.28288 6.605266-1.193099 16.673928-.969342 21.434964-6.129805-6.963066-2.205375-15.011895-2.074919-22.259386-1.577863-4.352947.298894-9.178287 1.856116-13.178381-.686135-5.953149-3.783239-9.910373-12.522173-13.552668-18.377854-8.980425-14.439388-17.441465-29.095929-26.041008-43.760726l-1.376261-2.335014-2.765943-4.665258c-1.380597-2.334387-2.750786-4.67476-4.079753-7.036188-1.02723-1.826391-2.549937-4.233231-1.078344-6.24705 1.545791-2.114476 4.91472-2.239146 7.956473-2.243117l.603351.000261c1.195428.001526 2.315572.002427 3.222811-.11692 12.27399-1.615019 24.718635-2.952611 37.098976-2.952611-.963749-3.352237-3.719791-7.141255-2.838484-10.73046 1.972017-8.030506 13.526287-10.543033 18.899867-4.780653 3.60767 3.868283 5.704174 9.192229 8.051303 13.859765 3.097352 6.162006 6.624228 12.118418 9.940876 18.16483 5.805578 10.585967 12.146205 20.881297 18.116667 31.375615.49237.865561.999687 1.726685 1.512269 2.587098l.771613 1.290552c2.577138 4.303168 5.164895 8.635123 6.553094 13.461506-20.735854-.9487-36.30176-25.018751-45.343193-41.283704-.721369 2.604176.450959 4.928448 1.388326 7.431066 1.948109 5.197619 4.276275 10.147535 7.20627 14.862134 4.184765 6.732546 8.982075 13.665732 15.313633 18.553722 11.236043 8.673707 26.05255 8.721596 39.572241 7.794364 8.669619-.595311 19.50252-4.542034 28.030338-1.864372 8.513803 2.673532 11.940924 12.063098 6.884745 19.276187-3.787393 5.403211-8.842747 7.443452-15.128962 8.257566 4.445282 9.53571 10.268996 18.385285 14.490036 28.072919 1.758491 4.035895 3.59118 10.22102 7.8048 12.350433 2.805507 1.416857 6.824562.09743 9.85761.034678-3.043765-8.053625-8.742992-14.887729-11.541904-23.118874 8.533589.390544 16.786875 4.843404 24.732651 7.685374 15.630376 5.590144 31.063836 11.701854 46.475333 17.86913l7.112077 2.848685c6.338978 2.538947 12.71588 5.052299 18.961699 7.812528 2.285297 1.009799 5.449427 3.370401 7.975455 1.917215 2.061054-1.186494 3.394144-4.015253 4.665403-5.931643 3.55573-5.361927 6.775921-10.928622 9.965609-16.513481 12.774414-22.36586 22.143967-46.872692 28.402976-71.833646 20.645168-82.323009 2.934117-173.156241-46.677107-241.922507-19.061454-26.420745-43.033164-49.262193-69.46165-68.1783861-66.13923-47.336721-152.911262-66.294198-232.486917-48.7172481zm135.205158 410.5292842c-17.532977 4.570931-35.601827 8.714164-53.58741 11.040088 2.365265 8.052799 8.145286 15.885969 12.376218 23.118874 1.635653 2.796558 3.3859 6.541816 6.618457 7.755557 3.651364 1.370619 8.063669-.853747 11.508927-1.975838-1.595256-4.364513-4.279573-8.292245-6.476657-12.385112-.905215-1.687677-2.305907-3.685809-1.559805-5.68972 1.410585-3.786541 7.266452-3.563609 10.509727-4.221671 8.54678-1.733916 17.004522-3.898008 25.557073-5.611281 3.150939-.631641 7.538512-2.342438 10.705115-1.285575 2.371037.791232 3.800147 2.744743 5.152304 4.781948l.606196.918752c.80912 1.222827 1.637246 2.41754 2.671212 3.351165 3.457625 3.121874 8.628398 3.60159 13.017619 4.453686-2.678546-6.027421-7.130424-11.301001-9.984571-17.339156-1.659561-3.511592-3.023155-8.677834-6.656381-10.707341-5.005064-2.795733-15.341663 2.461334-20.458024 3.795624zm-110.472507-40.151706c-.825246 10.467897-4.036369 18.984725-9.068639 28.072919 5.76683.729896 11.649079.989984 17.312856 2.39363 4.244947 1.051908 8.156828 3.058296 12.366325 4.211763-2.250671-6.157877-6.426367-11.651913-9.661398-17.339156-3.266358-5.740912-6.189758-12.717032-10.949144-17.339156z" fill="#fff" transform="translate(.9778)"/></svg>`
+        const reactQuerySVG = `
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="React-Query-Icon--Streamline-Svg-Logos" height="24" width="24"><desc>React Query Icon Streamline Icon: https://streamlinehq.com</desc><path fill="#00435b" d="m14.7521 14.55545 -0.45075 0.78275c-0.1358 0.235775 -0.387175 0.3811 -0.659275 0.3811H10.188925c-0.2721 0 -0.523475 -0.145325 -0.659275 -0.3811l-0.4508 -0.78275h5.67325Zm1.26195 -2.1912 -0.794825 1.380075h-6.6075l-0.794775 -1.380075h8.1971Zm-0.765625 -2.142725 0.7669 1.33165H7.815675l0.766875 -1.33165h6.665875Zm-1.60635 -2.0256c0.2721 0 0.523475 0.145325 0.659275 0.3811l0.47995 0.833375H9.049675l0.479975 -0.833375c0.1358 -0.235775 0.387175 -0.3811 0.659275 -0.3811h3.45315Z" stroke-width="0.25"></path><path fill="#002b3b" d="M5.163225 7.832825c-0.382525 -1.85485 -0.4646 -3.2775 -0.21735 -4.310525 0.14705 -0.6144 0.4159 -1.115615 0.824725 -1.4772325 0.4316 -0.3817725 0.977275 -0.56911 1.5904 -0.56911 1.0115 0 2.0748 0.46125 3.21115 1.3374925 0.4635 0.357425 0.94455 0.788225 1.444125 1.29265 0.039775 -0.0512 0.084725 -0.099475 0.1348 -0.1441 1.412425 -1.258675 2.60155 -2.04069 3.618625 -2.342215 0.60475 -0.179285 1.17255 -0.1963675 1.6896 -0.0223625 0.545775 0.1836725 0.98065 0.5633475 1.287475 1.0951525 0.50635 0.877675 0.639875 2.03095 0.4511 3.454925 -0.07695 0.580425 -0.2085 1.2127 -0.394375 1.89775 0.070125 0.008475 0.140425 0.024025 0.210025 0.047075 1.79205 0.59385 3.061 1.232475 3.82925 1.962325 0.4571 0.434225 0.755575 0.91765 0.863475 1.452775 0.1139 0.564825 0.00285 1.131375 -0.3036 1.662775 -0.505425 0.8764 -1.434725 1.567625 -2.75865 2.1151 -0.5316 0.219825 -1.133075 0.418925 -1.8051 0.598 0.030675 0.069225 0.05445 0.14275 0.070375 0.2199 0.382525 1.854825 0.4646 3.277475 0.21735 4.310525 -0.14705 0.6144 -0.415925 1.1156 -0.824725 1.477225 -0.4316 0.381775 -0.977275 0.5691 -1.590425 0.5691 -1.011475 0 -2.0748 -0.46125 -3.21115 -1.3375 -0.468425 -0.3612 -0.954775 -0.797375 -1.460075 -1.30875 -0.052 0.081325 -0.115825 0.1569 -0.191325 0.2242 -1.412425 1.25865 -2.60155 2.040675 -3.618625 2.3422 -0.60475 0.179275 -1.17255 0.19635 -1.6896 0.02235 -0.545775 -0.183675 -0.98065 -0.56335 -1.287475 -1.09515 -0.50635 -0.877675 -0.639875 -2.030925 -0.4511 -3.454925 0.079725 -0.6014 0.218075 -1.258475 0.414725 -1.97225 -0.07685 -0.007775 -0.15405 -0.024025 -0.230375 -0.049325 -1.79205 -0.593875 -3.0609975 -1.2325 -3.829255 -1.962325 -0.4570925 -0.434225 -0.75558 -0.91765 -0.86348 -1.452775 -0.11389075 -0.564825 -0.00284 -1.131375 0.30362 -1.662775 0.5054175 -0.8764 1.4347275 -1.567625 2.75864 -2.1151 0.54745 -0.2264 1.168975 -0.430775 1.86535 -0.61395 -0.0248 -0.06075 -0.0444 -0.1246 -0.058125 -0.19115Z" stroke-width="0.25"></path><path fill="#ff4154" d="M17.658925 16.28545c0.1782 -0.031575 0.348925 0.082675 0.388725 0.257925l0.002175 0.010375 0.019 0.098625c0.615925 3.238275 0.18205 4.857425 -1.301675 4.857425 -1.45165 0 -3.2996 -1.3816 -5.543825 -4.14485 -0.0496 -0.06105 -0.07635 -0.137475 -0.075675 -0.216125 0.001625 -0.183225 0.14865 -0.331125 0.330575 -0.3351l0.010525 -0.00005 0.118175 0.000825c0.9444 0.005125 1.862475 -0.0278 2.75425 -0.098775 1.0527 -0.083775 2.15195 -0.2272 3.29775 -0.430275Zm-10.18955 -2.447825 0.005675 0.0096 0.0593 0.1035c0.475225 0.826175 0.97035 1.610325 1.48535 2.35245 0.606525 0.873975 1.288575 1.758725 2.046175 2.65425 0.1172 0.13855 0.1038 0.344175 -0.0284 0.466475l-0.0086 0.0077 -0.07625 0.0656c-2.5066 2.147775 -4.135775 2.576525 -4.887575 1.2863 -0.735875 -1.262925 -0.469075 -3.5593 0.8004 -6.8891 0.0279 -0.073175 0.080325 -0.1344 0.148325 -0.1732 0.15895 -0.090725 0.360475 -0.03835 0.4556 0.116425ZM18.9309 9.05925l0.010275 0.00335 0.09435 0.032575C22.1295 10.17145 23.305 11.35425 22.561975 12.64355c-0.7267 1.26095 -2.839275 2.17905 -6.33775 2.754275 -0.078025 0.012825 -0.158075 -0.0021 -0.226225 -0.042175 -0.160975 -0.094625 -0.214775 -0.30185 -0.120125 -0.46285 0.501075 -0.85235 0.952375 -1.70045 1.353875 -2.544275 0.455375 -0.957025 0.8827 -1.98425 1.282 -3.081675 0.06055 -0.1664 0.238375 -0.256775 0.40685 -0.2106l0.0103 0.003Zm-10.92905 -0.541875c0.160975 0.094625 0.214775 0.30185 0.120125 0.46285 -0.501075 0.85235 -0.952375 1.70045 -1.353875 2.5443 -0.455375 0.957 -0.8827 1.984225 -1.282 3.081675 -0.061775 0.169775 -0.2457 0.2604 -0.41715 0.207575l-0.010275 -0.00335 -0.09435 -0.032575C1.87034 13.701575 0.6948525 12.518775 1.4378675 11.2295c0.7266925 -1.260975 2.8392825 -2.179075 6.3377575 -2.7543 0.078025 -0.012825 0.15805 0.0021 0.226225 0.042175Zm9.93295 -5.30105c0.735875 1.262925 0.469075 3.5593 -0.8004 6.8891 -0.0279 0.073175 -0.080325 0.1344 -0.148325 0.173225 -0.15895 0.0907 -0.360475 0.038325 -0.4556 -0.11645l-0.005675 -0.0096 -0.0593 -0.1035c-0.475225 -0.826175 -0.97035 -1.610325 -1.48535 -2.35245 -0.606525 -0.87395 -1.288575 -1.758725 -2.046175 -2.65425 -0.1172 -0.13855 -0.103825 -0.344175 0.0284 -0.466475l0.0086 -0.0077 0.076225 -0.0656C15.5538 2.3548625 17.183 1.9261 17.9348 3.216325ZM7.359475 2.447755c1.451675 0 3.299625 1.38162 5.54385 4.144845 0.0496 0.06105 0.07635 0.137475 0.075675 0.216125 -0.001625 0.183225 -0.14865 0.331125 -0.330575 0.3351l-0.010525 0.000075 -0.118175 -0.00085c-0.9444 -0.005125 -1.862475 0.0278 -2.75425 0.098775 -1.0527 0.0838 -2.15195 0.227225 -3.29775 0.430275 -0.1782 0.031575 -0.34895 -0.08265 -0.388725 -0.2579l-0.002175 -0.0104 -0.019 -0.098625c-0.61595 -3.238275 -0.18205 -4.85742 1.30165 -4.85742Z" stroke-width="0.25"></path></svg>`;
+
+        const map = {
+          react:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+          "reactquery": "data:image/svg+xml;utf8," + encodeURIComponent(reactQuerySVG),
+          "react-query": "data:image/svg+xml;utf8," + encodeURIComponent(reactQuerySVG),
+          python:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+          python:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+          fastapi:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
+          postgresql:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+          golang:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg",
+          go: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg",
+          awss3:
+            "https://upload.wikimedia.org/wikipedia/commons/b/bc/Amazon-S3-Logo.svg",
+          awssqs:
+            "https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Queue-Service.svg",
+          docker:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg",
+          openai:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4d/OpenAI_Logo.svg",
+          pandas:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg",
+          numpy:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg",
+          matplotlib:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg",
+          supabase:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
+          tailwind:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+          tailwindcss:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+          "tanstack": "data:image/svg+xml;utf8," + encodeURIComponent(tanstackSVG),
+            typescript:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+          vite:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
+
+        };
+        const key = n.replace(/\s+/g, "");
+        return (
+          map[key] ||
+          `https://placehold.co/100x100/333/FFF?text=${techName.substring(
+            0,
+            2
+          )}`
+        );
+      };
+
+      // --- STATE ---
+      let activeIndex = -1;
+      let isTransitioning = false; // Flag for GSAP flight
+      let previousPlanetPosition = new THREE.Vector3(); // Tracking for camera follow
+      let planets = [];
+      let scene, camera, renderer, controls, sun;
+      let textureLoader;
+
+      // --- COMET CURSOR STATE ---
+      let cometCanvas, cometCtx;
+      let cometParticles = [];
+      let mouseX = 0,
+        mouseY = 0;
+
+      // --- DOM ELEMENTS ---
+      const container = document.getElementById("canvas-container");
+      const loadingScreen = document.getElementById("loading-screen");
+      const profileSection = document.getElementById("profile-section");
+      const navHint = document.getElementById("nav-hint");
+      const sidePanel = document.getElementById("side-panel");
+      const panelContent = document.getElementById("panel-content");
+      // --- COMET CURSOR SETUP (Advanced Physics) ---
+      function initCometCursor() {
+        cometCanvas = document.getElementById("comet-canvas");
+        cometCtx = cometCanvas.getContext("2d");
+        cometCanvas.width = window.innerWidth;
+        cometCanvas.height = window.innerHeight;
+
+        // Comet state
+        let cometPos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        let targetPos = { x: cometPos.x, y: cometPos.y };
+        let velocityX = 0,
+          velocityY = 0;
+        let coreSize = 3;
+        let baseCoreSize = 3;
+        let glowIntensity = 0.6;
+        let tailLength = 12; // Dynamic tail length
+        let isHoveringInteractive = false;
+        let clickBurst = 0; // For starburst effect on click
+
+        // Trail history for smooth tail rendering
+        let trailHistory = [];
+        const maxTrailHistoryLength = 20;
+
+        // Track mouse movement with target
+        document.addEventListener("mousemove", (e) => {
+          targetPos.x = e.clientX;
+          targetPos.y = e.clientY;
+        });
+
+        // Click starburst effect
+        document.addEventListener("click", () => {
+          clickBurst = 1.0; // Trigger starburst
+        });
+
+        // Detect interactive element hover
+        document.addEventListener("mouseover", (e) => {
+          const isInteractive =
+            e.target.closest("button") ||
+            e.target.closest("a") ||
+            e.target.id === "side-panel";
+          isHoveringInteractive = !!isInteractive;
+        });
+
+        document.addEventListener("mouseout", () => {
+          isHoveringInteractive = false;
+        });
+
+        // Resize handler
+        window.addEventListener("resize", () => {
+          cometCanvas.width = window.innerWidth;
+          cometCanvas.height = window.innerHeight;
+        });
+
+        // Helper: Calculate distance
+        const distance = (x1, y1, x2, y2) => {
+          const dx = x2 - x1;
+          const dy = y2 - y1;
+          return Math.sqrt(dx * dx + dy * dy);
+        };
+
+        // Helper: Clamp value
+        const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
+
+        // Helper: Check proximity to planets
+        const checkPlanetProximity = () => {
+          if (planets.length === 0 || activeIndex === -1)
+            return { near: false, influence: 0 };
+
+          const planet = planets[activeIndex];
+          const planetWorldPos = new THREE.Vector3();
+          planet.mesh.getWorldPosition(planetWorldPos);
+
+          // Project 3D world position to 2D screen space (rough approximation)
+          const screenPos = new THREE.Vector3();
+          screenPos.copy(planetWorldPos);
+          screenPos.project(camera);
+
+          const screenX = (screenPos.x * 0.5 + 0.5) * cometCanvas.width;
+          const screenY = (-screenPos.y * 0.5 + 0.5) * cometCanvas.height;
+
+          const dist = distance(cometPos.x, cometPos.y, screenX, screenY);
+          const nearDistance = 180;
+          const isNear = dist < nearDistance;
+          const influence = isNear ? 1 - dist / nearDistance : 0;
+
+          return { near: isNear, influence, screenX, screenY };
+        };
+
+        // Animate comet trail
+        function animateComet() {
+          // Step 1: Apply physics & smooth movement (lerp)
+          const lerpFactor = 0.15;
+          cometPos.x += (targetPos.x - cometPos.x) * lerpFactor;
+          cometPos.y += (targetPos.y - cometPos.y) * lerpFactor;
+
+          // Step 2: Add to trail history for smooth tail (with interpolation when moving fast)
+          const spacing = 6; // desired spacing between history points
+          if (trailHistory.length === 0) {
+            trailHistory.push({ x: cometPos.x, y: cometPos.y });
+          } else {
+            const last = trailHistory[trailHistory.length - 1];
+            const dx = cometPos.x - last.x;
+            const dy = cometPos.y - last.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist > spacing) {
+              // insert intermediate points so trail stays dense and smooth
+              const segments = Math.min(Math.ceil(dist / spacing), 12);
+              for (let s = 1; s <= segments; s++) {
+                const t = s / segments;
+                trailHistory.push({ x: last.x + dx * t, y: last.y + dy * t });
+              }
+            } else {
+              trailHistory.push({ x: cometPos.x, y: cometPos.y });
+            }
+          }
+          // clamp history length
+          while (trailHistory.length > maxTrailHistoryLength)
+            trailHistory.shift();
+
+          // Step 3: Check gravitational influence from nearby planets
+          const proximity = checkPlanetProximity();
+          let gravityPullX = 0,
+            gravityPullY = 0;
+
+          if (proximity.near) {
+            const pullStrength = proximity.influence * 0.08;
+            gravityPullX = (proximity.screenX - cometPos.x) * pullStrength;
+            gravityPullY = (proximity.screenY - cometPos.y) * pullStrength;
+
+            // Extend tail when near planets
+            tailLength = 12 + proximity.influence * 15;
+            glowIntensity = 0.6 + proximity.influence * 0.5;
+          } else {
+            tailLength = 12;
+            glowIntensity = 0.6;
+          }
+
+          // Apply gravity
+          velocityX += gravityPullX;
+          velocityY += gravityPullY;
+
+          // Step 4: Update core size (pulse + interactive boost)
+          if (isHoveringInteractive) {
+            baseCoreSize = 4.5; // Expand on hover
+            glowIntensity = 0.9;
+          } else {
+            baseCoreSize = 3;
+          }
+
+          // Subtle pulse animation
+          const pulseAmount = Math.sin(Date.now() * 0.004) * 0.5;
+          coreSize = baseCoreSize + pulseAmount;
+
+          // Step 5: Click burst effect
+          if (clickBurst > 0) {
+            clickBurst -= 0.05;
+          }
+
+          // Clear canvas
+          cometCtx.clearRect(0, 0, cometCanvas.width, cometCanvas.height);
+
+          // Step 6: Draw tail (smooth curve through history)
+          if (trailHistory.length > 2) {
+            // Build a smooth path using quadratic curves
+            cometCtx.save();
+            // Outer glow stroke
+            cometCtx.lineJoin = "round";
+            cometCtx.lineCap = "round";
+            cometCtx.beginPath();
+            for (let i = 0; i < trailHistory.length - 1; i++) {
+              const p0 = trailHistory[i];
+              const p1 = trailHistory[i + 1];
+              const midX = (p0.x + p1.x) / 2;
+              const midY = (p0.y + p1.y) / 2;
+              if (i === 0) cometCtx.moveTo(p0.x, p0.y);
+              cometCtx.quadraticCurveTo(p0.x, p0.y, midX, midY);
+            }
+            // Glow: thicker, softer
+            cometCtx.strokeStyle = "rgba(0,255,157,0.18)";
+            cometCtx.lineWidth = Math.max(1, coreSize * 1.6);
+            cometCtx.shadowColor = "rgba(76,201,240,0.35)";
+            cometCtx.shadowBlur = 22;
+            cometCtx.stroke();
+            cometCtx.closePath();
+
+            // Inner core stroke
+            cometCtx.beginPath();
+            for (let i = 0; i < trailHistory.length - 1; i++) {
+              const p0 = trailHistory[i];
+              const p1 = trailHistory[i + 1];
+              const midX = (p0.x + p1.x) / 2;
+              const midY = (p0.y + p1.y) / 2;
+              if (i === 0) cometCtx.moveTo(p0.x, p0.y);
+              cometCtx.quadraticCurveTo(p0.x, p0.y, midX, midY);
+            }
+            cometCtx.strokeStyle = "rgba(76,201,240,0.9)";
+            cometCtx.lineWidth = Math.max(0.6, coreSize * 0.6);
+            cometCtx.shadowBlur = 8;
+            cometCtx.stroke();
+            cometCtx.closePath();
+
+            // Small tapered white core along path (dotted but tiny, blends into stroke)
+            cometCtx.beginPath();
+            for (let i = 0; i < trailHistory.length; i++) {
+              const prog = i / trailHistory.length;
+              const p = trailHistory[i];
+              const size = Math.max(0.4, coreSize * (0.45 * (1 - prog)));
+              cometCtx.globalAlpha = 1 - prog * 0.9;
+              cometCtx.fillStyle = "#ffffff";
+              cometCtx.beginPath();
+              cometCtx.arc(p.x, p.y, size, 0, Math.PI * 2);
+              cometCtx.fill();
+            }
+            cometCtx.restore();
+            cometCtx.globalAlpha = 1;
+          }
+
+          // Step 7: Draw core star
+          cometCtx.globalAlpha = 0.95 + glowIntensity * 0.1;
+          cometCtx.fillStyle = "#ffffff";
+          cometCtx.beginPath();
+          cometCtx.arc(cometPos.x, cometPos.y, coreSize, 0, Math.PI * 2);
+          cometCtx.fill();
+
+          // Inner bright core
+          cometCtx.globalAlpha = 1;
+          cometCtx.fillStyle = "#ffffff";
+          cometCtx.beginPath();
+          cometCtx.arc(cometPos.x, cometPos.y, coreSize * 0.6, 0, Math.PI * 2);
+          cometCtx.fill();
+
+          // Outer glow halo
+          cometCtx.globalAlpha = glowIntensity * 0.4;
+          cometCtx.strokeStyle = "#ffffff";
+          cometCtx.lineWidth = coreSize * 1.5;
+          cometCtx.beginPath();
+          cometCtx.arc(cometPos.x, cometPos.y, coreSize + 3, 0, Math.PI * 2);
+          cometCtx.stroke();
+
+          // Step 8: Draw click starburst
+          if (clickBurst > 0) {
+            const burstRadius = 8 + (1 - clickBurst) * 20;
+            const burstOpacity = clickBurst * 0.6;
+
+            cometCtx.globalAlpha = burstOpacity;
+            for (let i = 0; i < 8; i++) {
+              const angle = (i / 8) * Math.PI * 2;
+              const sx = cometPos.x + Math.cos(angle) * burstRadius;
+              const sy = cometPos.y + Math.sin(angle) * burstRadius;
+
+              cometCtx.fillStyle = "#ffffff";
+              cometCtx.beginPath();
+              cometCtx.arc(sx, sy, 1.5, 0, Math.PI * 2);
+              cometCtx.fill();
+            }
+          }
+
+          cometCtx.globalAlpha = 1;
+          requestAnimationFrame(animateComet);
+        }
+
+        animateComet();
+      }
+
+      // --- INIT THREE.JS ---
+      function init() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x050505, 0.002);
+        textureLoader = new THREE.TextureLoader();
+
+        camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+        camera.position.set(0, 30, 60);
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.enablePan = false;
+        controls.minDistance = 5;
+        controls.maxDistance = 100;
+
+        // Lights - improve overall scene illumination for visible planets
+        const ambientLight = new THREE.AmbientLight(0x666666, 1.2);
+        scene.add(ambientLight);
+
+        // Hemisphere for subtle sky-ground lighting
+        const hemi = new THREE.HemisphereLight(0x223344, 0x111111, 0.6);
+        scene.add(hemi);
+
+        // Directional rim light to create highlights on planets
+        const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+        dir.position.set(50, 50, 50);
+        scene.add(dir);
+
+        // Strong point-light at the sun position to light planets
+        const sunLight = new THREE.PointLight(0xfff5d6, 3.5, 300, 2);
+        sunLight.position.set(0, 0, 0);
+        scene.add(sunLight);
+
+        // Stars
+        createStars();
+
+        // Sun
+        createSun();
+
+        // Planets
+        createPlanets();
+
+        // Events
+        window.addEventListener("resize", onWindowResize);
+
+        // Start Loop
+        animate();
+
+        // Initialize comet cursor
+        initCometCursor();
+
+        // Hide Loading
+        setTimeout(() => {
+          loadingScreen.style.opacity = "0";
+          setTimeout(() => loadingScreen.remove(), 500);
+        }, 1000);
+      }
+
+      function createStars() {
+        const starGeometry = new THREE.BufferGeometry();
+        const starCount = 2000;
+        const posArray = new Float32Array(starCount * 3);
+        for (let i = 0; i < starCount * 3; i++) {
+          posArray[i] = (Math.random() - 0.5) * 200;
+        }
+        starGeometry.setAttribute(
+          "position",
+          new THREE.BufferAttribute(posArray, 3)
+        );
+        const starMaterial = new THREE.PointsMaterial({
+          size: 0.15,
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.8,
+        });
+        const starsMesh = new THREE.Points(starGeometry, starMaterial);
+        scene.add(starsMesh);
+      }
+
+      function createSun() {
+        const sunRadius = 3.5;
+        const sunGeometry = new THREE.SphereGeometry(sunRadius, 64, 64);
+
+        // Use a phong material so highlights and specular show well
+        const sunMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffd166,
+          emissive: 0xffb84d,
+          emissiveIntensity: 1.5,
+          specular: 0xffffff,
+          shininess: 80,
+        });
+        sun = new THREE.Mesh(sunGeometry, sunMaterial);
+
+        // Add layered glow using a sprite for additive blending
+        const spriteMap = textureLoader.load(
+          "https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/lensflare/lensflare0.png"
+        );
+        const spriteMaterial = new THREE.SpriteMaterial({
+          map: spriteMap,
+          color: 0xffd166,
+          transparent: true,
+          opacity: 0.6,
+          blending: THREE.AdditiveBlending,
+        });
+        const glow = new THREE.Sprite(spriteMaterial);
+        glow.scale.set(sunRadius * 6, sunRadius * 6, 1);
+        sun.add(glow);
+
+        // Slight rotation for subtle animation
+        sun.userData = { rotationSpeed: 0.0025 };
+
+        scene.add(sun);
+      }
+
+      // Helper: create a subtle procedural texture (radial + noise) for visibility
+      function createPlanetCanvas(hexColor) {
+        const size = 1024;
+        const canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d");
+
+        // Radial base
+        const grd = ctx.createRadialGradient(
+          size * 0.3,
+          size * 0.25,
+          size * 0.02,
+          size * 0.5,
+          size * 0.5,
+          size * 0.9
+        );
+        grd.addColorStop(0, "#ffffff");
+        grd.addColorStop(0.08, hexColor);
+        grd.addColorStop(1, "#000000");
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, size, size);
+
+        // Add subtle cloud/noise overlay
+        ctx.globalAlpha = 0.06;
+        for (let i = 0; i < 6000; i++) {
+          ctx.fillStyle = `rgba(255,255,255,${Math.random() * 0.6})`;
+          const x = Math.random() * size;
+          const y = Math.random() * size;
+          const r = Math.random() * 3;
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        return canvas;
+      }
+
+      function createPlanets() {
+        RESUME_DATA.projects.forEach((project, i) => {
+          // Orbit Ring
+          const orbitGeometry = new THREE.RingGeometry(
+            project.distance - 0.08,
+            project.distance + 0.08,
+            128
+          );
+          const orbitMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.12,
+          });
+          const orbit = new THREE.Mesh(orbitGeometry, orbitMaterial);
+          orbit.rotation.x = Math.PI / 2;
+          scene.add(orbit);
+
+          // Pivot Group
+          const planetPivot = new THREE.Group();
+          scene.add(planetPivot);
+
+          // Planet Mesh with procedural texture
+          const planetGeometry = new THREE.SphereGeometry(
+            Math.max(project.size, 0.8),
+            48,
+            48
+          );
+
+          // create canvas texture and normal-like bump map
+          const hex = `#${project.color.toString(16).padStart(6, "0")}`;
+          const canvas = createPlanetCanvas(hex);
+          const mapTex = new THREE.CanvasTexture(canvas);
+          mapTex.encoding = THREE.sRGBEncoding;
+
+          // Bump map created by taking the canvas and slightly blurring (approx using same canvas scaled)
+          const bumpCanvas = document.createElement("canvas");
+          bumpCanvas.width = 512;
+          bumpCanvas.height = 512;
+          const bctx = bumpCanvas.getContext("2d");
+          bctx.drawImage(canvas, 0, 0, 512, 512);
+          const bumpTex = new THREE.CanvasTexture(bumpCanvas);
+
+          const planetMaterial = new THREE.MeshStandardMaterial({
+            map: mapTex,
+            bumpMap: bumpTex,
+            bumpScale: 0.15,
+            roughness: 0.4,
+            metalness: 0.05,
+            emissive: new THREE.Color(project.color).multiplyScalar(0.08),
+            emissiveIntensity: 0.45,
+          });
+
+          const planet = new THREE.Mesh(planetGeometry, planetMaterial);
+          planet.position.set(project.distance, 0, 0);
+          planet.castShadow = false;
+          planet.receiveShadow = true;
+          planetPivot.add(planet);
+
+          // Slight atmosphere glow (sprite) to make edges pop
+          const atmCanvas = document.createElement("canvas");
+          atmCanvas.width = 128;
+          atmCanvas.height = 128;
+          const actx = atmCanvas.getContext("2d");
+          const ag = actx.createRadialGradient(64, 64, 10, 64, 64, 64);
+          actx.globalCompositeOperation = "lighter";
+          ag.addColorStop(0, "rgba(255,255,255,0.55)");
+          ag.addColorStop(0.25, hex);
+          ag.addColorStop(1, "rgba(0,0,0,0)");
+          actx.fillStyle = ag;
+          actx.fillRect(0, 0, 128, 128);
+          const atmTex = new THREE.CanvasTexture(atmCanvas);
+          const atmMat = new THREE.SpriteMaterial({
+            map: atmTex,
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.55,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+          });
+          const atmSprite = new THREE.Sprite(atmMat);
+          atmSprite.scale.set(project.size * 3.5, project.size * 3.5, 1);
+          planet.add(atmSprite);
+
+          // Moons (Tech Stack Logos) - brighten and use additive blending
+          const moons = [];
+          project.tech.forEach((tech, tIndex) => {
+            const moonDist = project.size + 1.2 + tIndex * 0.9;
+            const moonPivot = new THREE.Group();
+            planet.add(moonPivot); // Add moon pivot to planet
+
+            // Load Texture
+            const logoUrl = getTechLogo(tech);
+            const map = textureLoader.load(logoUrl);
+            map.encoding = THREE.sRGBEncoding;
+
+            // Use Sprite for Logo and make it more visible
+            const spriteMaterial = new THREE.SpriteMaterial({
+              map: map,
+              transparent: true,
+              opacity: 1,
+              depthWrite: false,
+            });
+            const moon = new THREE.Sprite(spriteMaterial);
+
+            // Scale sprite (logos need to be visible)
+            moon.scale.set(0.9, 0.9, 1);
+            moon.position.set(moonDist, 0, 0);
+
+            moonPivot.add(moon);
+
+            moonPivot.rotation.y = Math.random() * Math.PI * 2;
+            moons.push({
+              mesh: moon,
+              pivot: moonPivot,
+              speed: 0.01 + Math.random() * 0.015,
+            });
+          });
+
+          // Set initial random angle for planet
+          planetPivot.rotation.y =
+            (i / RESUME_DATA.projects.length) * Math.PI * 2;
+
+          planets.push({
+            id: project.id,
+            mesh: planet,
+            pivot: planetPivot,
+            moons: moons,
+            data: project,
+            speed: project.speed,
+          });
+        });
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // 1. Rotate Sun
+        if (sun) sun.rotation.y += 0.002;
+
+        // 2. Animate Planets & Moons
+        planets.forEach((p) => {
+          p.pivot.rotation.y += p.speed;
+          p.mesh.rotation.y += 0.01;
+          p.moons.forEach((m) => {
+            m.pivot.rotation.y += m.speed;
+          });
+        });
+
+        // 3. Camera Following Logic (The Fix)
+        if (activeIndex !== -1 && !isTransitioning) {
+          const planetData = planets[activeIndex];
+          const currentPos = new THREE.Vector3();
+          planetData.mesh.getWorldPosition(currentPos);
+
+          // Calculate how much the planet moved since last frame
+          const delta = currentPos.clone().sub(previousPlanetPosition);
+
+          // Move camera and target by the same amount to "lock" the frame
+          camera.position.add(delta);
+          controls.target.add(delta);
+
+          // Update tracker
+          previousPlanetPosition.copy(currentPos);
+        }
+
+        // 4. Update Controls & Render
+        controls.update();
+        renderer.render(scene, camera);
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      // --- NAVIGATION LOGIC ---
+      function updateUI(index) {
+        if (index === -1) {
+          // Show Profile
+          profileSection.classList.remove("opacity-0", "-translate-y-10");
+          profileSection.classList.add("opacity-100", "translate-y-0");
+
+          navHint.classList.remove("opacity-0");
+
+          sidePanel.classList.remove("active");
+        } else {
+          // Hide Profile
+          profileSection.classList.add("opacity-0", "-translate-y-10");
+          profileSection.classList.remove("opacity-100", "translate-y-0");
+
+          navHint.classList.add("opacity-0");
+
+          // Show Side Panel
+          sidePanel.classList.add("active");
+
+          // Update Content
+          const project = RESUME_DATA.projects[index];
+          const techBadges = project.tech
+            .map(
+              (t) =>
+                `<span class="px-3 py-1 bg-white/10 rounded-md text-sm border border-white/20 hover:bg-white/20 transition-colors">${t}</span>`
+            )
+            .join("");
+
+          panelContent.innerHTML = `
+                    <div class="mb-8 animate-fadeIn">
+                        <h3 class="text-sm text-gray-400 uppercase tracking-widest mb-2">Project ${
+                          index + 1
+                        } / ${RESUME_DATA.projects.length}</h3>
+                        <h2 class="text-4xl font-bold text-white mb-4" style="color: #${project.color.toString(
+                          16
+                        )}">
+                            ${project.title}
+                        </h2>
+                        <p class="text-gray-300 leading-relaxed text-lg mb-6">
+                            ${project.desc}
+                        </p>
+                    </div>
+                ${project.url ? `
+                <div class="mb-6">
+                  <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-4 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/40 rounded-md text-cyan-300 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    <span>Visit Project</span>
+                  </a>
+                </div>` : ''}
+                    <div class="mb-8">
+                        <h4 class="text-sm text-gray-400 uppercase tracking-widest mb-4">Tech Stack (Moons)</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${techBadges}
+                        </div>
+                    </div>
+                `;
+        }
+      }
+
+      function focusOnPlanet(index) {
+        const planetData = planets[index];
+        if (!planetData) return;
+
+        // Mark transition start
+        isTransitioning = true;
+        activeIndex = index;
+
+        // Get world position
+        const planetPos = new THREE.Vector3();
+        planetData.mesh.getWorldPosition(planetPos);
+
+        // Offset
+        const offset = new THREE.Vector3(5, 3, 5);
+        const camPos = planetPos.clone().add(offset);
+
+        // GSAP Camera
+        gsap.to(camera.position, {
+          x: camPos.x,
+          y: camPos.y,
+          z: camPos.z,
+          duration: 1.5, // Slightly faster to reduce drift during flight
+          ease: "power3.inOut",
+        });
+
+        // GSAP Controls Target
+        gsap.to(controls.target, {
+          x: planetPos.x,
+          y: planetPos.y,
+          z: planetPos.z,
+          duration: 1.5,
+          ease: "power3.inOut",
+          onComplete: () => {
+            // Start Locking
+            isTransitioning = false;
+            // Initialize the position tracker with current location
+            planetData.mesh.getWorldPosition(previousPlanetPosition);
+          },
+        });
+
+        updateUI(index);
+      }
+
+      function resetView() {
+        // Stop following
+        activeIndex = -1;
+        isTransitioning = true; // Use transition to move back
+
+        gsap.to(camera.position, {
+          x: 0,
+          y: 40,
+          z: 60,
+          duration: 2,
+          ease: "power3.inOut",
+        });
+
+        gsap.to(controls.target, {
+          x: 0,
+          y: 0,
+          z: 0,
+          duration: 2,
+          ease: "power3.inOut",
+          onComplete: () => {
+            isTransitioning = false;
+          },
+        });
+
+        updateUI(-1);
+      }
+
+      function showExperience() {
+        // Show Side Panel
+        sidePanel.classList.add("active");
+        navHint.classList.add("opacity-0");
+
+        // Reset camera if focused on a planet
+        if (activeIndex !== -1) {
+          resetView();
+        }
+
+        // Generate experience HTML
+        const experienceHTML = RESUME_DATA.experience
+          .map(
+            (exp, idx) => `
+                <div class="mb-6 p-4 border-l-2 border-yellow-500 bg-yellow-500/5 rounded-r-lg hover:bg-yellow-500/10 transition-colors">
+                    <div class="flex items-start justify-between mb-2">
+                        <div>
+                            <h3 class="text-xl font-bold text-yellow-400">${exp.company}</h3>
+                            <p class="text-gray-300 text-lg">${exp.position}</p>
+                        </div>
+                        <span class="text-sm text-gray-400 bg-gray-800 px-3 py-1 rounded-full">${exp.period}</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">${exp.description}</p>
+                </div>
+            `
+          )
+          .join("");
+
+        panelContent.innerHTML = `
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-yellow-400 mb-2">Work Experience</h2>
+                    <p class="text-gray-400 text-sm">3+ years of professional development</p>
+                </div>
+                <div class="space-y-4 overflow-y-auto max-h-96 md:max-h-full pr-2">
+                    ${experienceHTML}
+                </div>
+            `;
+      }
+
+      // --- BUTTON LISTENERS ---
+      document
+        .getElementById("btn-explore")
+        .addEventListener("click", () => focusOnPlanet(0));
+      document
+        .getElementById("btn-experience")
+        .addEventListener("click", showExperience);
+      document.getElementById("btn-reset").addEventListener("click", resetView);
+
+      document.getElementById("btn-next").addEventListener("click", () => {
+        const nextIndex = (activeIndex + 1) % RESUME_DATA.projects.length;
+        focusOnPlanet(nextIndex);
+      });
+
+      document.getElementById("btn-prev").addEventListener("click", () => {
+        const prevIndex =
+          activeIndex - 1 < 0
+            ? RESUME_DATA.projects.length - 1
+            : activeIndex - 1;
+        focusOnPlanet(prevIndex);
+      });
+
+      // Start
+      init();
+    </script>
+  </body>
+</html>

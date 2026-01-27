@@ -431,6 +431,13 @@
             >
               Certifications
             </button>
+            <button
+              id="btn-skills"
+              title="Skills"
+              class="px-6 py-2 border border-green-500 text-green-500 rounded-full hover:bg-green-500 hover:text-black transition-all uppercase tracking-wider text-sm"
+            >
+              Skills
+            </button>
           </div>
         </div>
       </div>
@@ -691,6 +698,26 @@
             url: "https://coursera.org/share/b6f9f8d70b896ed89f9ab039d04c503e",
           },
         ],
+        skills: {
+          frontend: [
+            "React",
+            "TypeScript",
+            "TailwindCSS",
+            "Vite",
+            "JavaScript",
+            "React Query",
+            "Tanstack",
+          ],
+          backend: [
+            "Python",
+            "FastAPI",
+            "Golang",
+            "PostgreSQL",
+            "Docker",
+          ],
+          tools: ["AWS S3", "AWS SQS", "OpenAI", "Supabase"],
+          ai: ["Pandas", "NumPy", "Matplotlib"],
+        },
       };
 
       // --- ASSETS HELPERS ---
@@ -742,6 +769,8 @@
             "data:image/svg+xml;utf8," + encodeURIComponent(tanstackSVG),
           typescript:
             "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+          javascript:
+            "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
           vite: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
         };
         const key = n.replace(/\s+/g, "");
@@ -1596,6 +1625,55 @@
             `;
       }
 
+      function showSkills() {
+        // Show Side Panel
+        sidePanel.classList.add("active");
+        navHint.classList.add("opacity-0");
+
+        // Reset camera if focused on a planet
+        if (activeIndex !== -1) {
+          resetView();
+        }
+
+        // Generate skills cloud HTML
+        const skillsCategories = RESUME_DATA.skills;
+        const skillsHTML = Object.keys(skillsCategories)
+          .map(
+            (category) => `
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-green-400 mb-4 capitalize">${category}</h3>
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                        ${skillsCategories[category]
+                          .map(
+                            (skill) => `
+                            <div class="flex flex-col items-center gap-2 group cursor-pointer transition-transform duration-200 hover:scale-110">
+                                <div class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white/5 hover:bg-green-500/10 rounded-lg border border-white/10 hover:border-green-500/50 transition-all">
+                                    <img src="${getTechLogo(
+                                      skill
+                                    )}" alt="${skill}" class="w-12 h-12 md:w-14 md:h-14 object-contain ${skill.toLowerCase() === 'openai' ? 'invert' : ''}" onerror="this.style.display='none'">
+                                </div>
+                                <span class="text-xs md:text-sm text-gray-300 group-hover:text-green-400 transition-colors text-center max-w-[60px] md:max-w-[70px]">${skill}</span>
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+
+        panelContent.innerHTML = `
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-green-400 mb-2">Skills</h2>
+                    <p class="text-gray-400 text-sm">Technologies and tools I work with</p>
+                </div>
+                <div class="overflow-y-auto max-h-96 md:max-h-[calc(100vh-300px)] pr-2">
+                    ${skillsHTML}
+                </div>
+            `;
+      }
+
       // --- BUTTON LISTENERS ---
       document
         .getElementById("btn-explore")
@@ -1606,6 +1684,9 @@
       document
         .getElementById("btn-certifications")
         .addEventListener("click", showCertifications);
+      document
+        .getElementById("btn-skills")
+        .addEventListener("click", showSkills);
       document.getElementById("btn-reset").addEventListener("click", resetView);
 
       document.getElementById("btn-next").addEventListener("click", () => {

@@ -1668,7 +1668,7 @@
                     <h2 class="text-4xl font-bold text-green-400 mb-2">Skills</h2>
                     <p class="text-gray-400 text-sm">Technologies and tools I work with</p>
                 </div>
-                <div class="overflow-y-auto max-h-96 md:max-h-[calc(100vh-300px)] pr-2">
+                <div class="overflow-auto md:overflow-y-auto max-h-96 md:max-h-[calc(100vh-300px)] pr-2">
                     ${skillsHTML}
                 </div>
             `;
@@ -1700,6 +1700,53 @@
             ? RESUME_DATA.projects.length - 1
             : activeIndex - 1;
         focusOnPlanet(prevIndex);
+      });
+
+      // Close side panel when clicking outside of it (ignore panel and control buttons)
+      document.addEventListener("click", (e) => {
+        try {
+          if (!sidePanel) return;
+          // Only act when panel is open
+          if (!sidePanel.classList.contains("active")) return;
+
+          // If a planet is currently focused (explore mode), do not close the panel
+          if (activeIndex !== -1) return;
+
+          const target = e.target;
+
+          // If click occurred inside the side panel, do nothing
+          if (sidePanel.contains(target)) return;
+
+          // If click is on any of the control buttons that should open/affect the panel, ignore
+          if (
+            target.closest &&
+            target.closest(
+              "#btn-explore,#btn-experience,#btn-certifications,#btn-skills,#btn-prev,#btn-next,#btn-reset"
+            )
+          ) {
+            return;
+          }
+
+          // Otherwise close panel and restore UI
+          updateUI(-1);
+        } catch (err) {
+          // swallow errors silently
+          console.error(err);
+        }
+      });
+
+      // Close side panel when pressing Escape
+      document.addEventListener("keydown", (e) => {
+        try {
+          if (e.key !== "Escape" && e.key !== "Esc") return;
+          if (!sidePanel) return;
+          if (!sidePanel.classList.contains("active")) return;
+
+          // Close panel immediately
+          updateUI(-1);
+        } catch (err) {
+          console.error(err);
+        }
       });
 
       // Start

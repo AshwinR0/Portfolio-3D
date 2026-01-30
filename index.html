@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ashwin R - Developer Universe</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Optimize Tailwind CDN loading -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <script src="https://cdn.tailwindcss.com" async></script>
     <!-- SEO: meta description, social previews, and JSON-LD -->
     <meta
       name="description"
@@ -618,7 +620,7 @@
     </script>
 
     <!-- Main Logic -->
-    <script type="module">
+    <script type="module" defer>
       import * as THREE from "three";
       import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
